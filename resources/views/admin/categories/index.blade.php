@@ -27,8 +27,8 @@
                 <tr>
                     <td style="color:var(--text-muted)">#{{ $category->id }}</td>
                     <td>
-                        @if($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}" width="40" height="40"
+                        @if($category->image_url)
+                            <img src="{{ $category->image_url }}" width="40" height="40"
                                  style="border-radius:8px;object-fit:cover;border:1px solid var(--border)">
                         @else
                             <div style="width:40px;height:40px;border-radius:8px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted)">

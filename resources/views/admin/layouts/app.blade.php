@@ -528,6 +528,12 @@
             Brands
         </a>
 
+         <a href="{{ route('admin.users.index') }}"
+           class="sb-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+            <span class="sb-icon"><i class="bi bi-award"></i></span>
+            Users
+        </a>
+
         <div class="sb-label">Configuration</div>
 
         <a href="{{ route('admin.properties.index') }}"
@@ -539,9 +545,9 @@
 
     <div class="sb-footer">
         <div class="sb-user">
-            <div class="sb-avatar">A</div>
+            <div class="sb-avatar">{{ substr(Auth::user()->name, 0, 1) }}</div>
             <div>
-                <div class="sb-uname">Admin</div>
+                <div class="sb-uname">{{ Auth::user()->name }}</div>
                 <div class="sb-urole">Super Admin</div>
             </div>
             <i class="bi bi-three-dots-vertical ms-auto" style="color:#475569;font-size:13px"></i>
@@ -562,9 +568,13 @@
         <button class="tb-btn" title="Search"><i class="bi bi-search"></i></button>
         <button class="tb-btn" title="Notifications"><i class="bi bi-bell"></i></button>
         <div class="tb-divider"></div>
+        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+            @csrf
+            <button type="submit" class="tb-btn" title="Logout"><i class="bi bi-box-arrow-right"></i></button>
+        </form>
         <div class="tb-user-pill">
-            <div class="tb-pill-avatar">A</div>
-            <span class="tb-pill-name">Admin</span>
+            <div class="tb-pill-avatar">{{ substr(Auth::user()->name, 0, 1) }}</div>
+            <span class="tb-pill-name">{{ Auth::user()->name }}</span>
             <i class="bi bi-chevron-down" style="font-size:10px;color:var(--muted)"></i>
         </div>
     </div>

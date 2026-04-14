@@ -34,4 +34,15 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class, 'product_category');
     }
+
+    /**
+     * Get the image URL.
+     */
+    public function getImageUrlAttribute(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+        return \Illuminate\Support\Facades\Storage::url('public/' . $this->image);
+    }
 }

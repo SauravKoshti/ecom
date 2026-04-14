@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // ── Admin user ──────────────────────────────────────────
-        User::firstOrCreate(['email' => 'admin@example.com'], [
-            'name'     => 'Admin',
-            'password' => bcrypt('password'),
+        // ── Call seeders ────────────────────────────────────────
+        $this->call([
+            UserSeeder::class,
         ]);
+
+        // Get existing users for product relationships
 
         // ── Brands (15) ─────────────────────────────────────────
         $brands = Brand::factory(15)->create();

@@ -41,17 +41,10 @@
                     </td>
                     <td>
                         <div style="font-weight:600">{{ $product->name }}</div>
-                        @if($product->variants_count > 0)
-                            <div style="font-size:11px;color:var(--text-muted)">{{ $product->variants_count }} variant(s)</div>
-                        @endif
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">{{ Str::limit($product->description, 50) }}</div>
                     </td>
                     <td><code style="background:var(--bg);padding:2px 7px;border-radius:5px;font-size:12px">{{ $product->sku ?? '—' }}</code></td>
-                    <td>
-                        <div style="font-weight:600">${{ number_format($product->price, 2) }}</div>
-                        @if($product->compare_price)
-                            <div style="font-size:11px;color:var(--text-muted);text-decoration:line-through">${{ number_format($product->compare_price, 2) }}</div>
-                        @endif
-                    </td>
+                    <td style="font-weight:600;color:var(--text)">${{ number_format($product->price, 2) }}</td>
                     <td>
                         <span class="badge bg-{{ $product->stock > 0 ? 'success' : 'danger' }}">{{ $product->stock }}</span>
                     </td>
@@ -68,6 +61,18 @@
                         <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
                               class="d-inline" onsubmit="return confirm('Delete this product?')">
                             @csrf @method('DELETE')
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="9" style="text-align:center;padding:48px;color:var(--text-muted)">
+                        <i class="bi bi-box-seam" style="font-size:32px;display:block;margin-bottom:8px;opacity:.4"></i>
+                        No products found.
+                    </td>
+                </tr>
+                @endforelse
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                         </form>
                     </td>
