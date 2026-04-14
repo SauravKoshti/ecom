@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $perPage = $request->get('per_page', 10);
 
-        $categories = Category::with('children','image')
+        $categories = Category::with('children')
             ->whereNull('parent_id')
             ->paginate($perPage);
 
